@@ -11,17 +11,40 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState } from 'react';
+//import { useHistory } from "react-router-dom";
 
-function Login() {
+function Login({ login }) {
     const theme = createTheme();
-    const handleSubmit = (event) => {
+    // const history = useHistory();
+
+    const [error, setError] = useState([]);
+    const [loginformData, setLoginFormData] = useState({
+        username: "",
+        password: ""
+    });
+
+    const handleChange = (evt) => {
+        const { name, value } = evt.target;
+        setLoginFormData(data => ({
+            ...data,
+            [name]: value
+        }));
+    }
+
+
+    async function handleSubmit(event) {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        let result = await login(loginformData);
+        if (result) {
+            //  history.push("/");
+            console.log("LoggedIN");
+        }
+        else {
+            setError(result.error);
+            console.log(error);
+        }
+
     };
 
     return (
@@ -49,11 +72,13 @@ function Login() {
                                 margin="normal"
                                 required
                                 fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
+                                id="username"
+                                label="Username"
+                                name="username"
+                                autoComplete="username"
                                 autoFocus
+                                value={loginformData.username}
+                                onChange={handleChange}
                             />
                             <TextField
                                 margin="normal"
@@ -64,6 +89,8 @@ function Login() {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                value={loginformData.password}
+                                onChange={handleChange}
                             />
                             <FormControlLabel
                                 control={<Checkbox value="remember" color="primary" />}

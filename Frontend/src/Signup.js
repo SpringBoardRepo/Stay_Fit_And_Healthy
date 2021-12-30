@@ -9,19 +9,44 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import { useState } from 'react';
 
-function Signup() {
+function Signup({ signUp }) {
 
     const theme = createTheme();
 
-    const handleSubmit = (event) => {
+    const INTIAL_DATA = {
+        username: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        email: ""
+    }
+
+    const [signUpFormData, setSignUpFromData] = useState(INTIAL_DATA);
+
+    const handleChange = (evt) => {
+        const { name, value } = evt.target;
+        setSignUpFromData(data => ({
+            ...data,
+            [name]: value
+        }));
+    }
+
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        // const data = new FormData(event.currentTarget);
+        // // eslint-disable-next-line no-console
+        // console.log({
+        //     email: data.get('email'),
+        //     password: data.get('password'),
+        // });
+        const result = await signUp(signUpFormData);
+        if (result) {
+            console.log("Sucess, SignedUp");
+            setSignUpFromData(INTIAL_DATA);
+        }
     };
 
     return (
@@ -55,6 +80,8 @@ function Signup() {
                                         id="firstName"
                                         label="First Name"
                                         autoFocus
+                                        value={signUpFormData.firstName}
+                                        onChange={handleChange}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
@@ -65,16 +92,20 @@ function Signup() {
                                         label="Last Name"
                                         name="lastName"
                                         autoComplete="family-name"
+                                        value={signUpFormData.lastName}
+                                        onChange={handleChange}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
                                         required
                                         fullWidth
-                                        id="email"
-                                        label="Email Address"
-                                        name="email"
-                                        autoComplete="email"
+                                        id="username"
+                                        label="Username"
+                                        name="username"
+                                        autoComplete="username"
+                                        value={signUpFormData.username}
+                                        onChange={handleChange}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -86,8 +117,23 @@ function Signup() {
                                         type="password"
                                         id="password"
                                         autoComplete="new-password"
+                                        value={signUpFormData.password}
+                                        onChange={handleChange}
                                     />
                                 </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        required
+                                        fullWidth
+                                        id="email"
+                                        label="Email Address"
+                                        name="email"
+                                        autoComplete="email"
+                                        value={signUpFormData.email}
+                                        onChange={handleChange}
+                                    />
+                                </Grid>
+
                             </Grid>
                             <Button
                                 type="submit"
