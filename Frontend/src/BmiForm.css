@@ -1,0 +1,19 @@
+.form {
+  text-align: initial;
+  padding: 20px;
+  width: 100%;
+}
+
+.form-control {
+  display: block;
+  width: 110%;
+}
+
+.BmrBtn {
+  margin-top: 1rem;
+}
+
+.Title {
+  margin-top: 1rem;
+  color: rgb(228, 121, 94);
+}
