@@ -6,6 +6,7 @@ import ActivityLevel from './ActivityLevel';
 import "./BmiForm.css";
 import BmrForm from './BmrForm';
 import DietPlan from './DietPlan';
+import MealSuggestions from './MealsComponents/MealSuggestions';
 
 function BMICalculator() {
 
@@ -121,56 +122,59 @@ function BMICalculator() {
         }
     }
     return (
-        <Card style={{ width: '22rem' }}>
-            <h4 className="Title">BMR &amp; Calories Calculator</h4>
-            <BmrForm
-                value={bmrData.weight, bmrData.height, bmrData.age, bmrData.gender}
-                handleSubmit={handleSubmit}
-                handleChange={handleChange}
-            />
-            {bmr ?
-                <div><Button className="Btn"
-                    color="success"
-                    size="md"
-                    block >
-                    Your BMR : {bmr}
-                </Button>
-                </div>
-                : null}
-            {bmr ?
-                <ActivityLevel
-                    name="activityLevel"
-                    value={bmrData.activityLevel}
+        <>
+            <Card style={{ width: '22rem' }}>
+                <h4 className="Title">BMR &amp; Calories Calculator</h4>
+                <BmrForm
+                    value={bmrData.weight, bmrData.height, bmrData.age, bmrData.gender}
+                    handleSubmit={handleSubmit}
                     handleChange={handleChange}
-                    handleBMRSubmit={handleBMRSubmit} /> : null
-            }
-            {calories ?
-                <div>
-                    <Button className="Btn"
+                />
+                {bmr ?
+                    <div><Button className="Btn"
                         color="success"
                         size="md"
                         block >
-                        Total Calories : {calories}
+                        Your BMR : {bmr}
                     </Button>
-                </div>
-                : null}
-            {calories ?
-                <DietPlan name="dietPlan"
-                    value={bmrData.dietPlan}
-                    handleChange={handleChange}
-                    handleDietPlanSubmit={handleDietPlanSubmit} />
-                : null}
-            {dietPlan ?
-                <div>
-                    <Button className="Btn"
-                        color="success"
-                        size="md"
-                        block >
-                        Total Calories You need : {dietPlan}
-                    </Button>
-                </div>
-                : null}
-        </Card>
+                    </div>
+                    : null}
+                {bmr ?
+                    <ActivityLevel
+                        name="activityLevel"
+                        value={bmrData.activityLevel}
+                        handleChange={handleChange}
+                        handleBMRSubmit={handleBMRSubmit} /> : null
+                }
+                {calories ?
+                    <div>
+                        <Button className="Btn"
+                            color="success"
+                            size="md"
+                            block >
+                            Total Calories : {calories}
+                        </Button>
+                    </div>
+                    : null}
+                {calories ?
+                    <DietPlan name="dietPlan"
+                        value={bmrData.dietPlan}
+                        handleChange={handleChange}
+                        handleDietPlanSubmit={handleDietPlanSubmit} />
+                    : null}
+                {dietPlan ?
+                    <div>
+                        <Button className="Btn"
+                            color="success"
+                            size="md"
+                            block >
+                            Total Calories You need : {dietPlan}
+                        </Button>
+                    </div>
+                    : null}
+            </Card>
+            <MealSuggestions />
+        </>
     );
 
 }

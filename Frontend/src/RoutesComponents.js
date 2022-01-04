@@ -1,5 +1,5 @@
 import { Redirect, Route, Routes } from "react-router-dom";
-import Meals from './Meals';
+import Meals from './MealsComponents/Meals';
 import BMICalculator from './BMICalculator';
 import Login from './Login'
 import Signup from './Signup';

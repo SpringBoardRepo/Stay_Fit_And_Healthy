@@ -38,9 +38,7 @@ function DietPlan({ value, handleChange, handleDietPlanSubmit }) {
                 Plan A Diet
             </Button>
         </Form>
-    )
+    );
 }
-
-
 
 export default DietPlan;
