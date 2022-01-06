@@ -6,7 +6,7 @@ import ActivityLevel from './ActivityLevel';
 import "./BmiForm.css";
 import BmrForm from './BmrForm';
 import DietPlan from './DietPlan';
-import MealSuggestions from './MealsComponents/MealSuggestions';
+
 
 function BMICalculator() {
 
@@ -40,22 +40,24 @@ function BMICalculator() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
-        let bmr = '';
-        let weight = +(data.get('weight'));
+        let bmr;
+        let weight = data.get('weight');
         let gender = data.get("gender");
-        let age = +(data.get('age'));
+        let age = data.get('age');
         let height = data.get('height');
-        let heightINFeet = height.slice(0, 1);
-        let heightInInches = height.slice(-1);
-        let h = ((heightINFeet * 30.48) + (heightInInches * 2.54));
+        // let heightINFeet = height.slice(0, 1);
+        // let heightInInches = height.slice(-1);
+        let h = height * 12;
 
+        console.log({ weight: +(weight), age: +(age), h: h })
         if (gender === 'female') {
-            bmr = (655 + (4.35 * weight) + (4.7 * h) - (4.7 * age)).toFixed(2);
-            setBmr(bmr);
+            bmr = 655 + (4.35 * (weight)) + (4.7 * h) - (4.7 * (age));
+            console.log(bmr.toFixed(2));
+            setBmr(bmr.toFixed(2));
         }
         else if (gender === 'male') {
-            bmr = (66 + (6.23 * weight) + (12.7 * h) - (6.8 * age)).toFixed(2);
-            setBmr(bmr);
+            bmr = 66 + (6.23 * weight) + (12.7 * h) - (6.8 * age);
+            setBmr(bmr.toFixed(2));
         }
         setBmrData(INTIAL_DATA);
     };
@@ -173,7 +175,6 @@ function BMICalculator() {
                     </div>
                     : null}
             </Card>
-            <MealSuggestions />
         </>
     );
 

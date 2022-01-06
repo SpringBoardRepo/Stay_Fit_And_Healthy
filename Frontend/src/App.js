@@ -26,7 +26,7 @@ function App() {
           console.log("USER", user);
           MyfitnessApi.token = token;
           let currentUser = await MyfitnessApi.getCurrentUser(user.username);
-          console.log(JSON.stringify("CURRENTUSER", currentUser));
+          console.log("CURRENTUSER", currentUser);
           setCurrentUser(currentUser);
         } catch (error) {
           console.error(error);
@@ -39,14 +39,15 @@ function App() {
 
   async function login(logindata) {
     try {
-      console.log(`LOGINDATA ${logindata}`);
+      console.log(`LOGINDATA ${JSON.stringify(logindata)}`);
       let token = await MyfitnessApi.login(logindata);
-      console.log(`TOKEN ${token}`);
       setToken(token);
+      return { success: true };
     } catch (error) {
       console.error("login failed", error);
       return { success: false, error };
     }
+
   }
 
   async function signUp(signdata) {

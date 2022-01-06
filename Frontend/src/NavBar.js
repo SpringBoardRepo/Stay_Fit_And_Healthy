@@ -1,22 +1,23 @@
 import "./NavBar.css";
-import { NavLink } from "react-router-dom";
-import { Navbar, Nav, NavItem } from "reactstrap";
+import { Nav, Navbar } from "react-bootstrap";
 
 function NavBar() {
     return (
         <div className="row">
-            <Navbar expand="md" >
-                <NavLink exact to="/" className="navbar-brand">
+            <Navbar expand="lg" bg="dark" variant="dark">
+                <Navbar.Brand href="/">
                     MyFitness
-                </NavLink>
-                <Nav className="ml-auto" navbar>
-                    <NavItem>
-                        <NavLink to="/meals">Meals</NavLink>
-                        <NavLink to="/bmi">BMI</NavLink>
-                        <NavLink to="/login">Login</NavLink>
-                        <NavLink to="/signup">Signup</NavLink>
-                    </NavItem>
-                </Nav>
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                        <Nav.Link href="/meals">Meals</Nav.Link>
+                        <Nav.Link href="/bmi">BMI</Nav.Link>
+                        <Nav.Link href="/login">Login</Nav.Link>
+                        <Nav.Link href="/signup">Signup</Nav.Link>
+
+                    </Nav>
+                </Navbar.Collapse>
             </Navbar>
         </div>
     );
