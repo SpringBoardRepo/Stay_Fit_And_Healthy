@@ -2,20 +2,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import MealsList from "./MealsList";
+import Constants from '../Config';
 
-const API_KEY = '2deb002db1a04eb78427182a06cdb591';
 const DEFAULT_CALORIES = '2000';
 
 function Meals() {
 
     const [mealData, setMealData] = useState(null);
     const [calories, setCalories] = useState(DEFAULT_CALORIES);
+    const URL = `https://api.spoonacular.com/mealplanner/generate?apiKey=${Constants.API_KEY}&timeFrame=day&targetCalories=${calories}`;
     useEffect(() => {
         async function getMeals() {
             try {
-                let results = await axios.get(`https://api.spoonacular.com/mealplanner/generate?apiKey=${API_KEY}&timeFrame=day&targetCalories=${calories}`);
-                // let results = await axios.get(`https://api.spoonacular.com/recipes/findByNutrients?apiKey=2deb002db1a04eb78427182a06cdb591&maxCarbs=50&number=10`);
-                console.log(results.data);
+                let results = await axios.get(URL);
                 setMealData(results.data);
             } catch (error) {
                 console.error(error);

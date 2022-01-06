@@ -1,7 +1,8 @@
 import { Card, Button } from "react-bootstrap";
+import Meals from "./Meals";
 import "./MealSuggestion.css"
 
-function MealSuggestions() {
+function MealSuggestions({ calories }) {
 
     return (
         <div>
