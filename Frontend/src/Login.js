@@ -11,11 +11,11 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
-//import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login({ login }) {
     const theme = createTheme();
-    // const history = useHistory();
+    const navigate = useNavigate();
 
     const [error, setError] = useState([]);
     const [loginformData, setLoginFormData] = useState({
@@ -37,7 +37,7 @@ function Login({ login }) {
         console.log(loginformData);
         let result = await login(loginformData);
         if (result) {
-            //  history.push("/");
+            navigate("/bmi");
             console.log("LoggedIN");
         }
         else {

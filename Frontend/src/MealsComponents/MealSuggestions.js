@@ -2,7 +2,7 @@ import { Card, Button } from "react-bootstrap";
 import Meals from "./Meals";
 import "./MealSuggestion.css"
 
-function MealSuggestions({ calories }) {
+function MealSuggestions() {
 
     return (
         <div>

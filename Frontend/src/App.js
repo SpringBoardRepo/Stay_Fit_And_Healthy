@@ -3,7 +3,7 @@ import './App.css';
 import RoutesComponents from './RoutesComponents';
 import MyfitnessApi from "./api";
 import NavBar from './NavBar';
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import useLocalStorage from "./useLocalStorage";
 import jwt_decode from "jwt-decode"
 import UserContext from "./UserContext";
@@ -15,13 +15,13 @@ function App() {
 
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
   const [currentUser, setCurrentUser] = useState(null);
+  const [calories, setCalories] = useState('');
 
   useEffect(function loadUserInfo() {
 
     async function getCurrentUser() {
       if (token) {
         try {
-          console.log(JSON.stringify(token));
           let user = jwt_decode(token, { complete: true });
           console.log("USER", user);
           MyfitnessApi.token = token;
@@ -39,7 +39,6 @@ function App() {
 
   async function login(logindata) {
     try {
-      console.log(`LOGINDATA ${JSON.stringify(logindata)}`);
       let token = await MyfitnessApi.login(logindata);
       setToken(token);
       return { success: true };
@@ -60,6 +59,11 @@ function App() {
     }
   }
 
+  //Keep track of the calories
+  function caloriesCount(calorie) {
+    setCalories(calorie);
+  }
+
   // Handle logout
   function logout() {
     setCurrentUser(null);
@@ -69,11 +73,13 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <UserContext.Provider
-          value={{ currentUser, setCurrentUser }}>
-          <NavBar logout={logout} />
-          <RoutesComponents login={login} signUp={signUp} />
-        </UserContext.Provider>
+        <Fragment>
+          <UserContext.Provider
+            value={{ currentUser, setCurrentUser, calories, caloriesCount }}>
+            <NavBar logout={logout} />
+            <RoutesComponents login={login} signUp={signUp} />
+          </UserContext.Provider>
+        </Fragment>
       </Router>
     </div>
   );

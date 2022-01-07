@@ -1,12 +1,13 @@
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Card } from "react-bootstrap";
 import { Button } from 'reactstrap'
 import ActivityLevel from './ActivityLevel';
 import "./BmiForm.css";
 import BmrForm from './BmrForm';
 import DietPlan from './DietPlan';
-
+import MealSuggestions from './MealsComponents/MealSuggestions';
+import UserContext from './UserContext';
 
 function BMICalculator() {
 
@@ -21,8 +22,8 @@ function BMICalculator() {
 
     const [bmrData, setBmrData] = useState(INTIAL_DATA);
     const [bmr, setBmr] = useState('');
-    const [calories, setCalories] = useState('');
     const [dietPlan, setDietPlan] = useState('');
+    const { calories, caloriesCount } = useContext(UserContext);
 
     const handleChange = (evt) => {
         const { name, value } = evt.target;
@@ -45,14 +46,10 @@ function BMICalculator() {
         let gender = data.get("gender");
         let age = data.get('age');
         let height = data.get('height');
-        // let heightINFeet = height.slice(0, 1);
-        // let heightInInches = height.slice(-1);
         let h = height * 12;
 
-        console.log({ weight: +(weight), age: +(age), h: h })
         if (gender === 'female') {
             bmr = 655 + (4.35 * (weight)) + (4.7 * h) - (4.7 * (age));
-            console.log(bmr.toFixed(2));
             setBmr(bmr.toFixed(2));
         }
         else if (gender === 'male') {
@@ -69,28 +66,35 @@ function BMICalculator() {
         const dataValue = data.get('activityLevel');
         if (dataValue === 'little or no exercise') {
             totalCalories = Math.floor(bmr * 1.2);
-            setCalories(totalCalories);
+            // setCalories(totalCalories);
+            caloriesCount(totalCalories);
+
         }
         else if (dataValue === 'light exercise/sports 1-3 days/week') {
             totalCalories = Math.floor(bmr * 1.375);
-            setCalories(totalCalories);
+            // setCalories(totalCalories);
+            caloriesCount(totalCalories);
         }
         else if (dataValue === 'moderate exercise/sports 3-5 days/week') {
             totalCalories = Math.floor(bmr * 1.55);
-            setCalories(totalCalories);
+            // setCalories(totalCalories);
+            caloriesCount(totalCalories);
         }
         else if (dataValue === 'hard exercise/sports 6-7 days a week') {
             totalCalories = Math.floor(bmr * 1.725);
-            setCalories(totalCalories);
+            // setCalories(totalCalories);
+            caloriesCount(totalCalories);
         }
         else if (dataValue === 'very hard exercise/sports and physical job or 2x training') {
             totalCalories = Math.floor(bmr * 1.9);
-            setCalories(totalCalories);
+            // setCalories(totalCalories);
+            caloriesCount(totalCalories);
         }
     }
 
     const handleDietPlanSubmit = (event) => {
         event.preventDefault();
+        // let totalCalories = calories;
         let totalCalories = calories;
         const data = new FormData(event.currentTarget);
         const dietPlanValue = data.get('dietPlan');
@@ -175,6 +179,7 @@ function BMICalculator() {
                     </div>
                     : null}
             </Card>
+            <MealSuggestions />
         </>
     );
 
