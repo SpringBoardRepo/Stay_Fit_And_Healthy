@@ -18,8 +18,8 @@ function MealCard({ imageUrl, mealData, nutrients, meal }) {
                             <li key={nutrient.name}> {nutrient.name} : {nutrient.amount}{nutrient.unit}
                             </li>)}
                     </Card.Text>
-                    <div><Button className="Btn" href='/foodJournal' variant="info" size="md" block>Add</Button></div>
-                    <div><Button className="Btn" href={mealData.sourceUrl} variant="info" size="md" block>Read more about it</Button></div>
+                    <div><Button className="Btn" href='/foodJournal' color="info" size="md" outline block>Add</Button></div>
+                    <div><Button className="Btn" href={mealData.sourceUrl} color="info" size="md" block>Read more about it</Button></div>
                 </Card.Body>
             </Card>
         </Col >

@@ -12,3 +12,10 @@
   width: 900px;
   justify-content: space-between;
 }
+.buttons {
+  margin-top: 1rem;
+}
+
+.MealSuggestionCard {
+  text-align: initial;
+}
