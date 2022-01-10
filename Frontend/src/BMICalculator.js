@@ -22,8 +22,7 @@ function BMICalculator() {
 
     const [bmrData, setBmrData] = useState(INTIAL_DATA);
     const [bmr, setBmr] = useState('');
-    const [dietPlan, setDietPlan] = useState('');
-    const { calories, caloriesCount } = useContext(UserContext);
+    const { calories, caloriesCount, dietcalories, caloriesCountAfterDietPlan } = useContext(UserContext);
 
     const handleChange = (evt) => {
         const { name, value } = evt.target;
@@ -66,65 +65,59 @@ function BMICalculator() {
         const dataValue = data.get('activityLevel');
         if (dataValue === 'little or no exercise') {
             totalCalories = Math.floor(bmr * 1.2);
-            // setCalories(totalCalories);
             caloriesCount(totalCalories);
 
         }
         else if (dataValue === 'light exercise/sports 1-3 days/week') {
             totalCalories = Math.floor(bmr * 1.375);
-            // setCalories(totalCalories);
             caloriesCount(totalCalories);
         }
         else if (dataValue === 'moderate exercise/sports 3-5 days/week') {
             totalCalories = Math.floor(bmr * 1.55);
-            // setCalories(totalCalories);
             caloriesCount(totalCalories);
         }
         else if (dataValue === 'hard exercise/sports 6-7 days a week') {
             totalCalories = Math.floor(bmr * 1.725);
-            // setCalories(totalCalories);
             caloriesCount(totalCalories);
         }
         else if (dataValue === 'very hard exercise/sports and physical job or 2x training') {
             totalCalories = Math.floor(bmr * 1.9);
-            // setCalories(totalCalories);
             caloriesCount(totalCalories);
         }
     }
 
     const handleDietPlanSubmit = (event) => {
         event.preventDefault();
-        // let totalCalories = calories;
         let totalCalories = calories;
         const data = new FormData(event.currentTarget);
         const dietPlanValue = data.get('dietPlan');
 
         if (dietPlanValue === 'Maintain current weight; 0 calories deficit') {
-            setDietPlan(totalCalories);
+            caloriesCountAfterDietPlan(totalCalories);
         }
         else if (dietPlanValue === 'Gain .5lb per week; 250 calories surplus') {
             totalCalories += 250;
-            setDietPlan(totalCalories);
+            caloriesCountAfterDietPlan(totalCalories);
         }
         else if (dietPlanValue === 'Gain 1lb per week; 500 calories surplus') {
             totalCalories += 500;
-            setDietPlan(totalCalories);
+            caloriesCountAfterDietPlan(totalCalories);
         }
         else if (dietPlanValue === 'Gain 1.5lb per week; 750 calories surplus') {
             totalCalories += 750;
-            setDietPlan(totalCalories);
+            caloriesCountAfterDietPlan(totalCalories);
         }
         else if (dietPlanValue === 'Lose .5lb per week; 250 calories deficit') {
             totalCalories -= 250;
-            setDietPlan(totalCalories);
+            caloriesCountAfterDietPlan(totalCalories);
         }
         else if (dietPlanValue === 'Lose 1lb per week; 500 calories deficit') {
             totalCalories -= 500;
-            setDietPlan(totalCalories);
+            caloriesCountAfterDietPlan(totalCalories);
         }
         else if (dietPlanValue === 'Lose 1.5lb per week; 750 calories deficit') {
             totalCalories -= 750;
-            setDietPlan(totalCalories);
+            caloriesCountAfterDietPlan(totalCalories);
         }
     }
     return (
@@ -168,13 +161,13 @@ function BMICalculator() {
                         handleChange={handleChange}
                         handleDietPlanSubmit={handleDietPlanSubmit} />
                     : null}
-                {dietPlan ?
+                {dietcalories ?
                     <div>
                         <Button className="Btn"
                             color="success"
                             size="md"
                             block >
-                            Total Calories You need : {dietPlan}
+                            Total Calories You need : {dietcalories}
                         </Button>
                     </div>
                     : null}
