@@ -10,7 +10,7 @@ function MealSearch() {
     const [searchedMeals, setSearchedMeals] = useState("");
 
     async function getSearchMeals() {
-        let results = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${Constants.API_KEY}&query=${query}&maxCalories=800&number=10`);
+        let results = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${Constants.API_KEY}&query=${query}&maxCalories=800&maxProtein=100&maxFat=100&maxCarbs=100&maxSaturatedFat=100&number=12`);
         setSearchedMeals(results.data.results)
 
     }
@@ -22,7 +22,6 @@ function MealSearch() {
     const handleChange = (evt) => {
         setQuery(evt.target.value);
     }
-
     return (
         <>
             <div className="searchMealInput">
