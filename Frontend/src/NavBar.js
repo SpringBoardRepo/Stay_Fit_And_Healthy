@@ -2,6 +2,7 @@ import "./NavBar.css";
 import { Nav, Navbar } from "react-bootstrap";
 import UserContext from "./UserContext";
 import { useContext } from "react";
+import { NavLink } from "react-router-dom";
 
 function NavBar({ logout }) {
 
@@ -12,12 +13,12 @@ function NavBar({ logout }) {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="/meals">Meals</Nav.Link>
-                        <Nav.Link href="/bmi">BMI</Nav.Link>
-                        <Nav.Link href="/foodJournal">Food Journal</Nav.Link>
-                        <Nav.Link exact to="/" onClick={logout}>
+                        <NavLink to="/meals">Meals</NavLink>
+                        <NavLink to="/bmi">BMI</NavLink>
+                        <NavLink to="/foodJournal">Food Journal</NavLink>
+                        <NavLink exact to="/" onClick={logout}>
                             Logout {currentUser.first_name || currentUser.username}
-                        </Nav.Link>
+                        </NavLink>
                     </Nav>
                 </Navbar.Collapse>
             </div>
