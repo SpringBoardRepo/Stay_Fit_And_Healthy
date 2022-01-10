@@ -10,18 +10,25 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
+import Alert from './Alert';
+import UserContext from './UserContext';
 
 function Login({ login }) {
     const theme = createTheme();
     const navigate = useNavigate();
-
-    const [error, setError] = useState([]);
+    const { currentUser } = useContext(UserContext);
+    const [formErrors, setFormErrors] = useState([]);
     const [loginformData, setLoginFormData] = useState({
         username: "",
         password: ""
     });
+    useEffect(() => {
+        if (currentUser) {
+            navigate("/bmi");
+        }
+    }, [currentUser]);
 
     const handleChange = (evt) => {
         const { name, value } = evt.target;
@@ -37,12 +44,11 @@ function Login({ login }) {
         console.log(loginformData);
         let result = await login(loginformData);
         if (result) {
-            navigate("/bmi");
+            // navigate("/bmi");
             console.log("LoggedIN");
         }
         else {
-            setError(result.error);
-            console.log(error);
+            setFormErrors(result.error);
         }
 
     };
@@ -95,6 +101,10 @@ function Login({ login }) {
                                 control={<Checkbox value="remember" color="primary" />}
                                 label="Remember me"
                             />
+                            {formErrors.length
+                                ? <Alert type="danger" messages={formErrors} />
+                                : null
+                            }
                             <Button
                                 type="submit"
                                 fullWidth

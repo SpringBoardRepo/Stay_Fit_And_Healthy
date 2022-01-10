@@ -10,6 +10,8 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { useState } from 'react';
+import Alert from './Alert';
+import { useNavigate } from "react-router-dom";
 
 function Signup({ signUp }) {
 
@@ -24,6 +26,9 @@ function Signup({ signUp }) {
     }
 
     const [signUpFormData, setSignUpFromData] = useState(INTIAL_DATA);
+    const [formErrors, setFormErrors] = useState([]);
+
+    const navigate = useNavigate();
 
     const handleChange = (evt) => {
         const { name, value } = evt.target;
@@ -36,16 +41,14 @@ function Signup({ signUp }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        // const data = new FormData(event.currentTarget);
-        // // eslint-disable-next-line no-console
-        // console.log({
-        //     email: data.get('email'),
-        //     password: data.get('password'),
-        // });
         const result = await signUp(signUpFormData);
         if (result) {
+            navigate("/bmi");
             console.log("Sucess, SignedUp");
             setSignUpFromData(INTIAL_DATA);
+        }
+        else {
+            setFormErrors(result.errors);
         }
     };
 
@@ -135,6 +138,10 @@ function Signup({ signUp }) {
                                 </Grid>
 
                             </Grid>
+                            {formErrors.length
+                                ? <Alert type="danger" messages={formErrors} />
+                                : null
+                            }
                             <Button
                                 type="submit"
                                 fullWidth
