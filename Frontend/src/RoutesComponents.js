@@ -13,27 +13,26 @@ function RoutesComponents({ login, signUp }) {
             <Route exact path="/" element={<Home />}></Route>
             <Route exact path="/login" element={<Login login={login} />}></Route>
             <Route exact path="/signup" element={<Signup signUp={signUp} />}></Route>
-            <Route path="/bmi"
-                element={<PrivateRoutes>
-                    <BMICalculator />
-                </PrivateRoutes>
-                }
-            />
-            <Route path="/meals"
-                element={
-                    <PrivateRoutes>
+            <Route element={<PrivateRoutes />}>
+                <Route path="/bmi"
+                    element={
+                        <BMICalculator />
+                    }
+                />
+                <Route path="/meals"
+                    element={
                         <Meals />
-                    </PrivateRoutes>
-                }
-            />
-            <Route path="/foodJournal"
-                element={
-                    <PrivateRoutes>
+                    }
+                />
+                <Route path="/foodJournal"
+                    element={
                         <FoodJournal />
-                    </PrivateRoutes>
-                }
-            />
+                    }
+                />
+            </Route >
+            <Route path="*" element={<Navigate to="/" />} />
         </Routes>
+
     )
 }
 
