@@ -28,6 +28,7 @@ function Meal({ meal }) {
         <>
             {imageUrl && mealData && nutrients &&
                 <MealCard meal={meal}
+                    key={meal.id}
                     imageUrl={imageUrl}
                     mealData={mealData}
                     nutrients={nutrients} />}
