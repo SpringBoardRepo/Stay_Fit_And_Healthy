@@ -23,3 +23,14 @@ main {
 .card-body {
   background-color: rgb(237 242 246);
 }
+
+.homeTitle {
+  text-align: center;
+  margin-top: 13rem;
+}
+
+.quote {
+  font-style: italic;
+  font-size: large;
+  color: darkorchid;
+}
