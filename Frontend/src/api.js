@@ -38,6 +38,15 @@ class MyfitnessApi {
         console.log(`CURRENT USER  ${JSON.stringify(res.user)}`);
         return res.user;
     }
+    static async addToFoodJournal(username, data) {
+        const res = await this.request(`users/${username}/meals`, data, "post");
+        return res;
+    }
+
+    static async getMeals(username) {
+        const res = await this.request(`users/meals/${username}`);
+        return res;
+    }
 }
 
 export default MyfitnessApi;

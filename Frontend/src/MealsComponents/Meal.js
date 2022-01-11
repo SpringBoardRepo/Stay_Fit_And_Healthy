@@ -27,8 +27,10 @@ function Meal({ meal }) {
     return (
         <>
             {imageUrl && mealData && nutrients &&
-                <MealCard meal={meal}
+                <MealCard
                     key={meal.id}
+                    id={meal.id}
+                    title={meal.title}
                     imageUrl={imageUrl}
                     mealData={mealData}
                     nutrients={nutrients} />}

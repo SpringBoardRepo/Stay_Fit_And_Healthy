@@ -1,6 +1,6 @@
 import { Card, Button } from "react-bootstrap";
-import Meals from "./Meals";
 import "./MealSuggestion.css"
+import { Link } from "react-router-dom";
 
 function MealSuggestions() {
 
@@ -17,7 +17,13 @@ function MealSuggestions() {
                         all of the recipes here follow my Usually-Sometimes-Rarely philosophy.
                         Notice there is no Never.
                     </Card.Text>
-                    <Button href="/meals" variant="info">Choose Your Meal</Button>
+                    <Link to="/meals">
+                        <Button size="md"
+                            block outline
+                            color="info">
+                            Choose Your Meal
+                        </Button>
+                    </Link>
                 </Card.Body>
             </Card>
         </div>

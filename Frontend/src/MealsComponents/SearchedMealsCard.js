@@ -4,28 +4,47 @@ import { Button } from 'reactstrap';
 import "./MealSearchedResult.css";
 import UserContext from '../UserContext';
 import { useContext } from 'react'
+import { Link } from "react-router-dom";
 
-function SearchedMealsCard({ meal, nutrition }) {
-    const { currentUser } = useContext(UserContext);
-    console.debug("SearchedMealsCard", "currentUser=", currentUser);
-    console.debug("SearchedMealsCard", meal, nutrition);
+function SearchedMealsCard({ id, title, image, nutrition }) {
+    const { addMealsToUsers } = useContext(UserContext);
+
+    let mealCalorie = parseInt(nutrition.nutrients[0].amount);
+
+
+    async function handleSave(evt) {
+        evt.preventDefault();
+        let data = { mealId: id, mealName: title, cal: mealCalorie };
+        await addMealsToUsers(data);
+    }
 
     return (
 
         < Card className="MealSuggestionCard mt-4" style={{ width: "22rem" }}>
-            <Card.Img variant="top" src={meal.image} alt="recipe" />
+            <Card.Img variant="top" src={image} alt="recipe" />
             <Card.Body className="cardBody">
-                <Card.Title>{meal.title}</Card.Title>
+                <Card.Title>{title}</Card.Title>
                 <Card.Text>
                     {nutrition.nutrients.map((nutrient) =>
                         <li key={nutrient.title}>{nutrient.name} : {nutrient.amount.toFixed(2)}{nutrient.unit}</li>)}
                 </Card.Text>
                 <div className="buttons">
-                    <Button href='/foodJournal'
-                        size="md" block outline color="info">
+                    <Button size="md"
+                        block outline onClick={handleSave}
+                        color="info">
                         Add
                     </Button>
                 </div>
+                <div className="buttons">
+                    <Link to="/foodJournal">
+                        <Button size="md"
+                            block outline
+                            color="info">
+                            Go to Food Journal
+                        </Button>
+                    </Link>
+                </div>
+
             </Card.Body>
         </Card>
     );

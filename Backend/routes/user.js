@@ -101,6 +101,35 @@ class User {
 
         return user;
     }
+
+    static async saveToFoodJournal(username, { mealId, mealName, cal }) {
+
+        console.log(`SAVE TO JOURNAl USERNAME ${username}, MEAL ID ${mealId}, MEAL NAME ${mealName}, CAL ${cal}`);
+
+        const preCheckUser = await db.query(
+            `SELECT username
+           FROM users
+           WHERE username = $1`, [username]);
+        const user = preCheckUser.rows[0];
+
+        if (!user) throw new NotFoundError(`No username: ${username}`);
+
+        await db.query(
+            `INSERT INTO foodjournal (user_name, meal_id , meal_name, calories)
+             VALUES ($1, $2 ,$3,$4)`,
+            [username, mealId, mealName, cal]);
+    }
+
+    static async getMeals(username) {
+
+        const result = await db.query(
+            `SELECT id ,meal_name , calories 
+                       FROM foodjournal
+                       WHERE user_name =$1`, [username]);
+
+        console.log(result.rows);
+        return result.rows;
+    }
 }
 
 module.exports = User

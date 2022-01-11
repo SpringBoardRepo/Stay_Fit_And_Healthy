@@ -21,5 +21,28 @@ router.get("/:username", async function (req, res, next) {
     }
 });
 
+router.get("/meals/:username", async function (req, res, next) {
+    try {
+        let { username } = req.params;
+        const meals = await User.getMeals(username);
+        return res.json({ meals });
+    } catch (err) {
+        return next(err);
+    }
+});
 
+router.post("/:username/meals", async function (req, res, next) {
+
+    try {
+        const mealId = +(req.body.mealId);
+        console.log(req.body);
+        const meal = await User.saveToFoodJournal(req.params.username, { ...req.body });
+        return res.json({ Saved: mealId });
+    }
+
+    catch (err) {
+        return next(err);
+    }
+
+})
 module.exports = router;

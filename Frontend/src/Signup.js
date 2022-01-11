@@ -42,13 +42,12 @@ function Signup({ signUp }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const result = await signUp(signUpFormData);
-        if (result) {
-            navigate("/bmi");
-            console.log("Sucess, SignedUp");
+        if (result.success === 'true') {
+
             setSignUpFromData(INTIAL_DATA);
         }
         else {
-            setFormErrors(result.errors);
+            setFormErrors(result.error);
         }
     };
 
@@ -138,10 +137,11 @@ function Signup({ signUp }) {
                                 </Grid>
 
                             </Grid>
-                            {formErrors.length
-                                ? <Alert type="danger" messages={formErrors} />
-                                : null
-                            }
+                            {formErrors ?
+                                formErrors.length
+                                    ? <Alert type="danger" messages={formErrors} />
+                                    : null
+                                : null}
                             <Button
                                 type="submit"
                                 fullWidth

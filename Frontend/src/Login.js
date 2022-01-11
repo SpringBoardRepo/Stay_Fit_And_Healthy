@@ -43,8 +43,8 @@ function Login({ login }) {
         event.preventDefault();
         console.log(loginformData);
         let result = await login(loginformData);
-        if (result) {
-            // navigate("/bmi");
+        if (result.success === 'true') {
+            navigate("/bmi");
             console.log("LoggedIN");
         }
         else {
@@ -101,10 +101,11 @@ function Login({ login }) {
                                 control={<Checkbox value="remember" color="primary" />}
                                 label="Remember me"
                             />
-                            {formErrors.length
+                            {formErrors ? 
+                            formErrors.length
                                 ? <Alert type="danger" messages={formErrors} />
                                 : null
-                            }
+                            :null}
                             <Button
                                 type="submit"
                                 fullWidth

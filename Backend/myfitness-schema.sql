@@ -7,3 +7,14 @@ CREATE TABLE users (
   email TEXT NOT NULL
     CHECK (position('@' IN email) > 1)
 );
+
+
+CREATE TABLE foodjournal (
+  id SERIAL PRIMARY KEY,
+  user_name VARCHAR(25)
+    REFERENCES users ON DELETE CASCADE,
+ meal_id INTEGER, 
+ created_at timestamp,
+ meal_name TEXT NOT NULL,
+ calories INTEGER
+)

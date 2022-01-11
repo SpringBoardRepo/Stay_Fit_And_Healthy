@@ -7,7 +7,7 @@ import { Fragment, useEffect, useState } from "react";
 import useLocalStorage from "./useLocalStorage";
 import jwt_decode from "jwt-decode"
 import UserContext from "./UserContext";
-import { useNavigate } from "react-router-dom";
+
 // Key name for storing token in localStorage for "remember me" re-login
 export const TOKEN_STORAGE_ID = "myfitness-token";
 
@@ -17,7 +17,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [calories, setCalories] = useState(2000);
   const [dietcalories, setDietCalories] = useState('');
-
+  const [savedMeals, setSavedMeals] = useState([]);
 
   useEffect(function loadUserInfo() {
 
@@ -55,6 +55,7 @@ function App() {
     try {
       let token = await MyfitnessApi.signup(signdata);
       setToken(token);
+      return { success: true };
     } catch (error) {
       console.error("signUp failed", error);
       return { success: false, error };
@@ -75,12 +76,23 @@ function App() {
     setToken(null);
   }
 
+  async function addMealsToUsers(data) {
+
+    let res = await MyfitnessApi.addToFoodJournal(currentUser.username, data);
+    //setSavedMeals(res);
+  }
+
+  async function getMeals() {
+    let meal = await MyfitnessApi.getMeals(currentUser.username);
+    return meal;
+  }
+
   return (
     <div className="App">
       <Router>
         <Fragment>
           <UserContext.Provider
-            value={{ currentUser, setCurrentUser, calories, caloriesCount, dietcalories, caloriesCountAfterDietPlan }}>
+            value={{ currentUser, setCurrentUser, calories, caloriesCount, dietcalories, caloriesCountAfterDietPlan, addMealsToUsers, getMeals }}>
             <NavBar logout={logout} />
             <RoutesComponents login={login} signUp={signUp} />
           </UserContext.Provider>

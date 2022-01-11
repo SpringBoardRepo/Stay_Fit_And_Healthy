@@ -13,7 +13,9 @@ function MealSearchedResult({ searchedMeals }) {
             {searchedMeals.map((meal) =>
                 <SearchedMealsCard
                     key={meal.id}
-                    meal={meal}
+                    id={meal.id}
+                    title={meal.title}
+                    image={meal.image}
                     nutrition={meal.nutrition} />
             )
             }
