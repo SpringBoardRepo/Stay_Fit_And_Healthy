@@ -4,7 +4,7 @@ import Table from 'react-bootstrap/Table';
 import "./Meal.css";
 import SavedMealsCard from './SavedMealsCard';
 
-function MealsTable({ meals }) {
+function MealsTable({ meals, handleRemove }) {
 
     return (
         <div className="container">
@@ -15,7 +15,8 @@ function MealsTable({ meals }) {
                         mealId={m.meal_id}
                         img={m.img}
                         calories={m.calories}
-                        mealName={m.meal_name} />
+                        mealName={m.meal_name}
+                        handleRemove={handleRemove} />
                 )}
             </Row>
             <Table striped bordered hover variant='dark' responsive="sm" className='Table' >

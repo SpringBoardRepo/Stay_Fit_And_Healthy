@@ -10,20 +10,27 @@ function FoodJournal() {
 
     const { getMeals } = useContext(UserContext);
     const [userMeals, setUsersMeals] = useState('');
+    const { removeMealsFromList } = useContext(UserContext);
 
     useEffect(() => {
         async function getUserMeals() {
             let m = await getMeals();
-            setUsersMeals(m);
+            setUsersMeals(m.meals);
         }
         getUserMeals();
     }, [getMeals])
 
+    async function handleRemove(mealId) {
+        const newList = userMeals.filter((meal) => meal.meal_id !== mealId);
+        await removeMealsFromList(mealId);
+        setUsersMeals(newList);
+    }
+
     return (
         <>
             {userMeals ?
-                userMeals.meals.length
-                    ? <MealsTable meals={userMeals.meals} />
+                userMeals.length
+                    ? <MealsTable meals={userMeals} handleRemove={handleRemove} />
                     : <div className='conatainer FoodJournalTitle'>
                         <img src={image} className='image' />
                         <h6>Looks like you haven't added anything to your Food Journal yet.  </h6>
@@ -35,7 +42,6 @@ function FoodJournal() {
                                 </Button>
                             </Link>
                         </div>
-
                     </div>
                 : null}
         </>

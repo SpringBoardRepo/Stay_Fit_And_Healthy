@@ -121,7 +121,7 @@ class User {
     static async getMeals(username) {
 
         const result = await db.query(
-            `SELECT id ,meal_name , calories ,img, meal_id
+            `SELECT id ,meal_name , calories ,img, meal_id, created_at
                        FROM foodjournal
                        WHERE user_name =$1`, [username]);
 

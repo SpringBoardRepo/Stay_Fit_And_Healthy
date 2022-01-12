@@ -4,12 +4,7 @@ import { Button } from 'reactstrap';
 import UserContext from "../UserContext";
 import { useContext } from "react";
 
-function SavedMealsCard({ mealId, mealName, calories, img }) {
-    const { removeMealsFromList } = useContext(UserContext);
-
-    async function handleClick() {
-        await removeMealsFromList(mealId);
-    }
+function SavedMealsCard({ mealId, mealName, calories, img, handleRemove }) {
 
     return (
         <Col className='MealsRow1'>
@@ -24,7 +19,7 @@ function SavedMealsCard({ mealId, mealName, calories, img }) {
                             Calories:  {calories}
                         </Button>
                         <Button size="md"
-                            block onClick={handleClick}
+                            block onClick={() => handleRemove(mealId)}
                             color="warning">
                             Delete
                         </Button>

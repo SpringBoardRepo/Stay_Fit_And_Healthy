@@ -101,11 +101,11 @@ function Login({ login }) {
                                 control={<Checkbox value="remember" color="primary" />}
                                 label="Remember me"
                             />
-                            {formErrors ? 
-                            formErrors.length
-                                ? <Alert type="danger" messages={formErrors} />
-                                : null
-                            :null}
+                            {formErrors ?
+                                formErrors.length
+                                    ? <Alert type="danger" messages={formErrors} />
+                                    : null
+                                : null}
                             <Button
                                 type="submit"
                                 fullWidth

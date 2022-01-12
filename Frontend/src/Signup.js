@@ -43,7 +43,7 @@ function Signup({ signUp }) {
         event.preventDefault();
         const result = await signUp(signUpFormData);
         if (result.success === 'true') {
-
+            navigate('/bmi');
             setSignUpFromData(INTIAL_DATA);
         }
         else {
