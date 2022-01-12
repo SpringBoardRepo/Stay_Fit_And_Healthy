@@ -9,7 +9,7 @@ MyFitness is a mobile-friendly web application that allows users to keep track o
 
 ### Guest 
   - BMR calculator.
-  - Sign up for a new account with password hashing using Flask-Bcrypt.
+  - Sign up for a new account with password hashing `Bcryptjs`
 
 ### Signed up User - everything Guest can do and more:
   - Log in
@@ -21,7 +21,7 @@ MyFitness is a mobile-friendly web application that allows users to keep track o
   - Table of Food logged.
 
 ## Login/SignUp Safely
-- Used `JSON Web Tokens` for user Authorization.
+-  Users can create an account login with password hashing using the `Bcryptjs library. Used `JSON Web Tokens` for user Authorization.
 
 ## Technology Stack
  - React
