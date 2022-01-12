@@ -1,6 +1,6 @@
 import { Form } from "react-bootstrap";
 import { Button } from 'reactstrap'
-import "./BmiForm.css";
+import "./BmrForm.css";
 
 
 function BmrForm({ weight, height, age, gender, handleChange, handleSubmit }) {

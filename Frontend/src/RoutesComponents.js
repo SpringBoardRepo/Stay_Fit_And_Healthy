@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import Meals from './MealsComponents/Meals';
-import BMICalculator from './BMICalculator';
+import BMICalculator from './BMRCalculator';
 import Login from './Login'
 import Signup from './Signup';
 import Home from './Home';
@@ -13,12 +13,12 @@ function RoutesComponents({ login, signUp }) {
             <Route exact path="/" element={<Home />}></Route>
             <Route exact path="/login" element={<Login login={login} />}></Route>
             <Route exact path="/signup" element={<Signup signUp={signUp} />}></Route>
-            <Route element={<PrivateRoutes />}>
-                <Route path="/bmi"
-                    element={
-                        <BMICalculator />
-                    }
-                />
+            <Route path="/bmr"
+                element={
+                    <BMICalculator />
+                }
+            /><
+                Route element={<PrivateRoutes />}>
                 <Route path="/meals"
                     element={
                         <Meals />

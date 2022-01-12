@@ -3,13 +3,13 @@ import { useContext, useState } from 'react';
 import { Card } from "react-bootstrap";
 import { Button } from 'reactstrap'
 import ActivityLevel from './ActivityLevel';
-import "./BmiForm.css";
+import "./BmrForm.css";
 import BmrForm from './BmrForm';
 import DietPlan from './DietPlan';
 import MealSuggestions from './MealsComponents/MealSuggestions';
 import UserContext from './UserContext';
 
-function BMICalculator() {
+function BMRCalculator() {
 
     const INTIAL_DATA = {
         weight: "",
@@ -177,4 +177,4 @@ function BMICalculator() {
     );
 
 }
-export default BMICalculator;
+export default BMRCalculator;

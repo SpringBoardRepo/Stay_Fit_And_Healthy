@@ -14,7 +14,7 @@ function NavBar({ logout }) {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <NavLink to="/meals">Meals</NavLink>
-                        <NavLink to="/bmi">BMR</NavLink>
+                        <NavLink to="/bmr">BMR</NavLink>
                         <NavLink to="/foodJournal">Food Journal</NavLink>
                         <NavLink exact to="/" onClick={logout}>
                             Logout {currentUser.first_name || currentUser.username}
@@ -27,6 +27,7 @@ function NavBar({ logout }) {
     function logoutNav() {
         return (
             <Navbar expand="lg" bg="dark" variant="dark">
+                <NavLink to="/bmr">BMR</NavLink>
                 <Nav.Link href="/login">Login</Nav.Link>
                 <Nav.Link href="/signup">SignUp</Nav.Link>
             </Navbar >

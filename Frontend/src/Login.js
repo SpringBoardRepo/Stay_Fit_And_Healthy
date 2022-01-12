@@ -26,7 +26,7 @@ function Login({ login }) {
     });
     useEffect(() => {
         if (currentUser) {
-            navigate("/bmi");
+            navigate("/bmr");
         }
     }, [currentUser]);
 
@@ -44,7 +44,7 @@ function Login({ login }) {
         console.log(loginformData);
         let result = await login(loginformData);
         if (result.success === 'true') {
-            navigate("/bmi");
+            navigate("/bmr");
             console.log("LoggedIN");
         }
         else {

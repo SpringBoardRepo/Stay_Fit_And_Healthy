@@ -1,7 +1,7 @@
 
 import { Form } from "react-bootstrap";
 import { Button } from 'reactstrap'
-import "./BmiForm.css";
+import "./BmrForm.css";
 
 function DietPlan({ value, handleChange, handleDietPlanSubmit }) {
     return (
