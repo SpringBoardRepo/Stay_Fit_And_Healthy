@@ -34,7 +34,7 @@ MyFitness is a mobile-friendly web application that allows users to keep track o
  - CSS
  - Bootstrap
  - Upsplash 
- - [Spponacular](https://api.spoonacular.com/)
+ - [Spoonacular](https://spoonacular.com/food-api)
 
 ### To Run Locally
  - `psql  CREATE DATABASE myfitness`
