@@ -3,19 +3,21 @@ import { Card } from "react-bootstrap";
 import { Button } from 'reactstrap';
 import "./MealSearchedResult.css";
 import UserContext from '../UserContext';
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { Link } from "react-router-dom";
 
 function SearchedMealsCard({ id, title, image, nutrition }) {
     const { addMealsToUsers } = useContext(UserContext);
 
+    const [added, setAdded] = useState();
     let mealCalorie = parseInt(nutrition.nutrients[0].amount);
 
 
     async function handleSave(evt) {
         evt.preventDefault();
-        let data = { mealId: id, mealName: title, cal: mealCalorie };
+        let data = { mealId: id, mealName: title, cal: mealCalorie, img: image };
         await addMealsToUsers(data);
+        setAdded(true);
     }
 
     return (
@@ -32,7 +34,7 @@ function SearchedMealsCard({ id, title, image, nutrition }) {
                     <Button size="md"
                         block outline onClick={handleSave}
                         color="info">
-                        Add
+                        {added ? "Added" : "Add"}
                     </Button>
                 </div>
                 <div className="buttons">

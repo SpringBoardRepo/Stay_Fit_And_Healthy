@@ -1,14 +1,16 @@
 import axios from "axios";
 import { useState, useEffect } from "react"
-import { Card, Button, Row, Col, Container } from "react-bootstrap";
 import Constants from "../Config";
 import MealCard from "./MealCard";
+import LoadingSpinner from "../LoadingSpinner";
 
 function Meal({ meal }) {
 
     const [imageUrl, setImageUrl] = useState("");
     const [mealData, setMealData] = useState("");
     const [nutrients, setNutrients] = useState("");
+    const [mealLoaded, setMealLoaded] = useState(false);
+
     const URL = `https://api.spoonacular.com/recipes/${meal.id}/information?apiKey=${Constants.API_KEY}&includeNutrition=true`;
     useEffect(() => {
         async function getMealInfo() {
@@ -20,10 +22,12 @@ function Meal({ meal }) {
             } catch (error) {
                 console.log(error);
             }
+            setMealLoaded(true);
         }
         getMealInfo();
+        setMealLoaded(false);
     }, [meal.id])
-
+    if (!mealLoaded) return <LoadingSpinner />;
     return (
         <>
             {imageUrl && mealData && nutrients &&

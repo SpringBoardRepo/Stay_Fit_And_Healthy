@@ -12,7 +12,7 @@ class MyfitnessApi {
 
         const url = `${BASE_URL}/${endpoint}`;
         const headers = { Authorization: `Bearer ${MyfitnessApi.token}` };
-        const params = (method === "get") ? data : {};
+        const params = (method === "get" || method === 'delete') ? data : {};
         try {
             return (await axios({ url, method, data, params, headers })).data;
         } catch (err) {
@@ -45,6 +45,11 @@ class MyfitnessApi {
 
     static async getMeals(username) {
         const res = await this.request(`users/meals/${username}`);
+        return res;
+    }
+
+    static async remove(username, meal_id) {
+        const res = await this.request(`users/${username}/meals/${meal_id}`, {}, "delete");
         return res;
     }
 }

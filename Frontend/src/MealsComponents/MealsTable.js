@@ -1,10 +1,24 @@
+import './MealsTable.css';
+import { Row } from "react-bootstrap";
+import Table from 'react-bootstrap/Table';
+import "./Meal.css";
+import SavedMealsCard from './SavedMealsCard';
 
-import Table from 'react-bootstrap/Table'
 function MealsTable({ meals }) {
-    console.log(`MEALS ${meals}`)
+
     return (
-        <div className="contanier">
-            <Table striped bordered hover variant='dark' responsive="md" className='table'>
+        <div className="container">
+            <Row className="MealRow1">
+                {meals.map((m) =>
+                    <SavedMealsCard
+                        key={m.id}
+                        mealId={m.meal_id}
+                        img={m.img}
+                        calories={m.calories}
+                        mealName={m.meal_name} />
+                )}
+            </Row>
+            <Table striped bordered hover variant='dark' responsive="sm" className='Table' >
                 <thead>
                     <tr>
                         <th>#</th>
@@ -13,14 +27,15 @@ function MealsTable({ meals }) {
                         <th>Created At</th>
                     </tr>
                 </thead>
-                {meals.map((m) => <tbody>
-                    <tr>
-                        <td>{m.id}</td>
-                        <td>{m.meal_name}</td>
-                        <td>{m.calories}</td>
-                        <td>@mdo</td>
-                    </tr>
-                </tbody>
+                {meals.map((m) =>
+                    <tbody key={m.id}>
+                        <tr>
+                            <td>{m.id}</td>
+                            <td>{m.meal_name}</td>
+                            <td>{m.calories}</td>
+                            <td>{m.created_at}</td>
+                        </tr>
+                    </tbody>
                 )}
             </Table>
         </div>

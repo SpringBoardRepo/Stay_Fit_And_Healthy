@@ -87,12 +87,23 @@ function App() {
     return meal;
   }
 
+  async function removeMealsFromList(mealId) {
+    let meal = await MyfitnessApi.remove(currentUser.username, mealId);
+    console.log(meal);
+  }
+
   return (
     <div className="App">
       <Router>
         <Fragment>
           <UserContext.Provider
-            value={{ currentUser, setCurrentUser, calories, caloriesCount, dietcalories, caloriesCountAfterDietPlan, addMealsToUsers, getMeals }}>
+            value={{
+              currentUser, setCurrentUser,
+              calories, caloriesCount,
+              dietcalories,
+              caloriesCountAfterDietPlan,
+              addMealsToUsers, getMeals, removeMealsFromList
+            }}>
             <NavBar logout={logout} />
             <RoutesComponents login={login} signUp={signUp} />
           </UserContext.Provider>

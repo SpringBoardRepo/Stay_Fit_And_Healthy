@@ -1,7 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
-
+import { Link } from 'react-router-dom';
 import UserContext from '../UserContext';
 import MealsTable from './MealsTable';
+import { Button } from 'reactstrap';
+import "./FoodJournal.css";
+import image from "../Image/empty-cart (2).png";
 
 function FoodJournal() {
 
@@ -21,7 +24,19 @@ function FoodJournal() {
             {userMeals ?
                 userMeals.meals.length
                     ? <MealsTable meals={userMeals.meals} />
-                    : "Nothing is Added"
+                    : <div className='conatainer FoodJournalTitle'>
+                        <img src={image} className='image' />
+                        <h6>Looks like you haven't added anything to your Food Journal yet.  </h6>
+                        <div>
+                            <Link to='/meals'>
+                                <Button size="md"
+                                    color="success">
+                                    Click here to add
+                                </Button>
+                            </Link>
+                        </div>
+
+                    </div>
                 : null}
         </>
     )
