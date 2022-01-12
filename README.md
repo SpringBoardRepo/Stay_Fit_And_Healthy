@@ -1,16 +1,45 @@
-### MyFitness
+## MyFitness
 
-This website will help you to keep track of your health. Users will be able to create an account; it will have information about their health. User can calculate their weight via BMI calculator and according to that user can choose meals. That will contain calories and ingredients. And website also provides some workout/yoga (videos or blog).
-BMI calculator 
-API - `https://wger.de/en/software/api`
+MyFitness is a mobile-friendly web application that allows user to keep track of there health. And it is designed for people who want to manage their weight and plan there meals. The goal is to track their calories in and out to help with the struggles of weight loss or weight gain.
 
-### User Flow
-Home Page there will be option for login and signUp.
-The user will either log in or signup for the application. Once logged in, the website will redirect the user to the main page which will show a BMI form where user can enter details and it will ask user to what they want to do lose/gain weight based on that show calories.
-On the same page there will be a link for `gotothemealOption`
-On the Meals Page will show some meals option with the link to see details/nutrients/calories/recipes etc and addAMeal link. And a Search bar to search any food item/meal.
-On Navbar there will be a link for ShowMyMealPlan which will contain user added meal/food detail along their calories count.
-And thinking to display table(Datewise) with food Name and the total intake calories.
-`APi -  https://api.spoonacular.com/`	
+## Live Demo
 
-My database schema will consist of tables: usersInfo, weight-table, Users-meals-details
+
+## Features:
+
+### Guest 
+  - BMR calculator.
+  - Sign up for a new account with password hashing using Flask-Bcrypt.
+
+### Signed up User - everything Guest can do and more:
+  - Log in
+  - Calculate their calories via BMR and Calories Calculator.
+  - User can enter details and it will ask user to what they want to do lose/gain weight based on that show calories.
+  - It will give user, some meal suggestion as per user calories count.
+  - User can search meals.
+  - User can add meal to their food journal to keep track of the calories.
+  - Table of Food logged.
+
+## Login/SignUp Safely
+- Used `JSON Web Tokens` for user authentication.
+
+## Technology Stack
+ - React
+ - JavaScript
+ - Node.js
+ - Express
+ - JSON Web Tokens
+ - Postgres
+ - ReactStrap
+ - HTML
+ - CSS
+ - Bootstrap
+ - Upsplash 
+ - [Spponacular](https://api.spoonacular.com/)	
+
+### To run Loaclly
+ - `psql  CREATE DATABASE myfitness`
+ - Connect to the DB `\c myfitness`.
+ - Create tables `\i myfitness-schema.sql`.
+ - Start Backend Server `node server.js` will start on Port:3001
+ - Start Frontend Server `npm start` start on Port:3000
