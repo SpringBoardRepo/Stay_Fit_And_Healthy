@@ -102,9 +102,7 @@ class User {
         return user;
     }
 
-    static async saveToFoodJournal(username, { mealId, mealName, cal }) {
-
-        console.log(`SAVE TO JOURNAl USERNAME ${username}, MEAL ID ${mealId}, MEAL NAME ${mealName}, CAL ${cal}`);
+    static async saveToFoodJournal(username, { mealId, mealName, cal, img }) {
 
         const preCheckUser = await db.query(
             `SELECT username
@@ -115,20 +113,30 @@ class User {
         if (!user) throw new NotFoundError(`No username: ${username}`);
 
         await db.query(
-            `INSERT INTO foodjournal (user_name, meal_id , meal_name, calories)
-             VALUES ($1, $2 ,$3,$4)`,
-            [username, mealId, mealName, cal]);
+            `INSERT INTO foodjournal (user_name, meal_id , meal_name, calories,img)
+             VALUES ($1, $2 ,$3, $4, $5)`,
+            [username, mealId, mealName, cal, img]);
     }
 
     static async getMeals(username) {
 
         const result = await db.query(
-            `SELECT id ,meal_name , calories 
+            `SELECT id ,meal_name , calories ,img, meal_id
                        FROM foodjournal
                        WHERE user_name =$1`, [username]);
 
-        console.log(result.rows);
         return result.rows;
+    }
+
+    /** Delete given mealId from database; returns undefined. */
+
+    static async remove(username, mealId) {
+
+        let result = await db.query(`DELETE
+           FROM foodjournal
+           WHERE meal_id = $1 AND user_name =$2`, [mealId, username]);
+        const meal = result.rows;
+        if (!meal) throw new NotFoundError(`No Meals: ${mealId}`);
     }
 }
 

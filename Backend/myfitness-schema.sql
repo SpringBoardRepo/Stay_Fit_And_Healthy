@@ -14,7 +14,8 @@ CREATE TABLE foodjournal (
   user_name VARCHAR(25)
     REFERENCES users ON DELETE CASCADE,
  meal_id INTEGER, 
- created_at timestamp,
+ created_at timestamp with time zone DEFAULT now(),
  meal_name TEXT NOT NULL,
- calories INTEGER
+ calories INTEGER,
+ img VARCHAR
 )
