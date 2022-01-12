@@ -7,7 +7,7 @@ function BmrForm({ weight, height, age, gender, handleChange, handleSubmit }) {
     return (
         <Form className="form" onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
-                <Form.Label><b>Weight</b></Form.Label>
+                <Form.Label><b>Weight</b><span>(lbs)</span></Form.Label>
                 <Form.Control type="text"
                     placeholder="Enter Your Weight in Pounds"
                     name="weight"
@@ -18,9 +18,9 @@ function BmrForm({ weight, height, age, gender, handleChange, handleSubmit }) {
                     onChange={handleChange} />
             </Form.Group>
             <Form.Group className="mb-3" >
-                <Form.Label><b>Height</b></Form.Label>
+                <Form.Label><b>Height</b><span>(Ex.5.0)</span></Form.Label>
                 <Form.Control type="text"
-                    placeholder="Enter Your Height Ex.5'0"
+                    placeholder="Enter Your Height Ex. 5.0"
                     required
                     id="height"
                     name="height"

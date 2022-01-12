@@ -101,6 +101,43 @@ class User {
 
         return user;
     }
+
+    static async saveToFoodJournal(username, { mealId, mealName, cal, img }) {
+
+        const preCheckUser = await db.query(
+            `SELECT username
+           FROM users
+           WHERE username = $1`, [username]);
+        const user = preCheckUser.rows[0];
+
+        if (!user) throw new NotFoundError(`No username: ${username}`);
+
+        await db.query(
+            `INSERT INTO foodjournal (user_name, meal_id , meal_name, calories,img)
+             VALUES ($1, $2 ,$3, $4, $5)`,
+            [username, mealId, mealName, cal, img]);
+    }
+
+    static async getMeals(username) {
+
+        const result = await db.query(
+            `SELECT id ,meal_name , calories ,img, meal_id, created_at
+                       FROM foodjournal
+                       WHERE user_name =$1`, [username]);
+
+        return result.rows;
+    }
+
+    /** Delete given mealId from database; returns undefined. */
+
+    static async remove(username, mealId) {
+
+        let result = await db.query(`DELETE
+           FROM foodjournal
+           WHERE meal_id = $1 AND user_name =$2`, [mealId, username]);
+        const meal = result.rows;
+        if (!meal) throw new NotFoundError(`No Meals: ${mealId}`);
+    }
 }
 
 module.exports = User

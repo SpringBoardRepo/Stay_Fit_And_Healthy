@@ -3,7 +3,7 @@ import './App.css';
 import RoutesComponents from './RoutesComponents';
 import MyfitnessApi from "./api";
 import NavBar from './NavBar';
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import useLocalStorage from "./useLocalStorage";
 import jwt_decode from "jwt-decode"
 import UserContext from "./UserContext";
@@ -15,18 +15,20 @@ function App() {
 
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
   const [currentUser, setCurrentUser] = useState(null);
+  const [calories, setCalories] = useState(2000);
+  const [dietcalories, setDietCalories] = useState('');
+  const [savedMeals, setSavedMeals] = useState([]);
 
   useEffect(function loadUserInfo() {
 
     async function getCurrentUser() {
       if (token) {
         try {
-          console.log(JSON.stringify(token));
           let user = jwt_decode(token, { complete: true });
-          console.log("USER", user);
+          console.log("USER", user)
           MyfitnessApi.token = token;
           let currentUser = await MyfitnessApi.getCurrentUser(user.username);
-          console.log(JSON.stringify("CURRENTUSER", currentUser));
+          console.log("CURRENTUSER", currentUser);
           setCurrentUser(currentUser);
         } catch (error) {
           console.error(error);
@@ -39,24 +41,33 @@ function App() {
 
   async function login(logindata) {
     try {
-      console.log(`LOGINDATA ${logindata}`);
       let token = await MyfitnessApi.login(logindata);
-      console.log(`TOKEN ${token}`);
       setToken(token);
+      return { success: true };
     } catch (error) {
       console.error("login failed", error);
       return { success: false, error };
     }
+
   }
 
   async function signUp(signdata) {
     try {
       let token = await MyfitnessApi.signup(signdata);
       setToken(token);
+      return { success: true };
     } catch (error) {
       console.error("signUp failed", error);
       return { success: false, error };
     }
+  }
+
+  //Keep track of the calories
+  function caloriesCount(calorie) {
+    setCalories(calorie);
+  }
+  function caloriesCountAfterDietPlan(calorie) {
+    setDietCalories(calorie);
   }
 
   // Handle logout
@@ -65,14 +76,38 @@ function App() {
     setToken(null);
   }
 
+  async function addMealsToUsers(data) {
+
+    let res = await MyfitnessApi.addToFoodJournal(currentUser.username, data);
+    //setSavedMeals(res);
+  }
+
+  async function getMeals() {
+    let meal = await MyfitnessApi.getMeals(currentUser.username);
+    return meal;
+  }
+
+  async function removeMealsFromList(mealId) {
+    let meal = await MyfitnessApi.remove(currentUser.username, mealId);
+    console.log(meal);
+  }
+
   return (
     <div className="App">
       <Router>
-        <UserContext.Provider
-          value={{ currentUser, setCurrentUser }}>
-          <NavBar logout={logout} />
-          <RoutesComponents login={login} signUp={signUp} />
-        </UserContext.Provider>
+        <Fragment>
+          <UserContext.Provider
+            value={{
+              currentUser, setCurrentUser,
+              calories, caloriesCount,
+              dietcalories,
+              caloriesCountAfterDietPlan,
+              addMealsToUsers, getMeals, removeMealsFromList
+            }}>
+            <NavBar logout={logout} />
+            <RoutesComponents login={login} signUp={signUp} />
+          </UserContext.Provider>
+        </Fragment>
       </Router>
     </div>
   );

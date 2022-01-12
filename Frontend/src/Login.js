@@ -1,6 +1,5 @@
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -11,18 +10,25 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useState } from 'react';
-//import { useHistory } from "react-router-dom";
+import { useEffect, useState, useContext } from 'react';
+import { useNavigate } from "react-router-dom";
+import Alert from './Alert';
+import UserContext from './UserContext';
 
 function Login({ login }) {
     const theme = createTheme();
-    // const history = useHistory();
-
-    const [error, setError] = useState([]);
+    const navigate = useNavigate();
+    const { currentUser } = useContext(UserContext);
+    const [formErrors, setFormErrors] = useState([]);
     const [loginformData, setLoginFormData] = useState({
         username: "",
         password: ""
     });
+    useEffect(() => {
+        if (currentUser) {
+            navigate("/bmi");
+        }
+    }, [currentUser]);
 
     const handleChange = (evt) => {
         const { name, value } = evt.target;
@@ -35,22 +41,21 @@ function Login({ login }) {
 
     async function handleSubmit(event) {
         event.preventDefault();
+        console.log(loginformData);
         let result = await login(loginformData);
-        if (result) {
-            //  history.push("/");
+        if (result.success === 'true') {
+            navigate("/bmi");
             console.log("LoggedIN");
         }
         else {
-            setError(result.error);
-            console.log(error);
+            setFormErrors(result.error);
         }
 
     };
 
     return (
         <ThemeProvider theme={theme}>
-            <Grid container component="main" sx={{ height: '100vh' }}>
-                <CssBaseline />
+            <Grid container sx={{ height: '100vh' }}>
                 <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square style={{ margin: "auto" }}>
                     <Box
                         sx={{
@@ -96,6 +101,11 @@ function Login({ login }) {
                                 control={<Checkbox value="remember" color="primary" />}
                                 label="Remember me"
                             />
+                            {formErrors ?
+                                formErrors.length
+                                    ? <Alert type="danger" messages={formErrors} />
+                                    : null
+                                : null}
                             <Button
                                 type="submit"
                                 fullWidth
@@ -104,13 +114,13 @@ function Login({ login }) {
                             >
                                 Log In
                             </Button>
-                            <Grid container>
-                                <Grid item>
-                                    <Link href="/signup" variant="body2">
-                                        {"Don't have an account? Sign Up"}
-                                    </Link>
-                                </Grid>
+
+                            <Grid item>
+                                <Link href="/signup" variant="body2">
+                                    {"Don't have an account? Sign Up"}
+                                </Link>
                             </Grid>
+
                         </Box>
                     </Box>
                 </Grid>

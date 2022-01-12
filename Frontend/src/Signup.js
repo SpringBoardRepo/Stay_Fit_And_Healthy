@@ -10,6 +10,8 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { useState } from 'react';
+import Alert from './Alert';
+import { useNavigate } from "react-router-dom";
 
 function Signup({ signUp }) {
 
@@ -24,6 +26,9 @@ function Signup({ signUp }) {
     }
 
     const [signUpFormData, setSignUpFromData] = useState(INTIAL_DATA);
+    const [formErrors, setFormErrors] = useState([]);
+
+    const navigate = useNavigate();
 
     const handleChange = (evt) => {
         const { name, value } = evt.target;
@@ -36,22 +41,19 @@ function Signup({ signUp }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        // const data = new FormData(event.currentTarget);
-        // // eslint-disable-next-line no-console
-        // console.log({
-        //     email: data.get('email'),
-        //     password: data.get('password'),
-        // });
         const result = await signUp(signUpFormData);
-        if (result) {
-            console.log("Sucess, SignedUp");
+        if (result.success === 'true') {
+            navigate('/bmi');
             setSignUpFromData(INTIAL_DATA);
+        }
+        else {
+            setFormErrors(result.error);
         }
     };
 
     return (
         <ThemeProvider theme={theme}>
-            <Grid container component="main" sx={{ height: '100vh' }}>
+            <Grid container sx={{ height: '100vh' }}>
                 <CssBaseline />
                 <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square style={{ margin: "auto" }}>
                     <Box
@@ -135,6 +137,11 @@ function Signup({ signUp }) {
                                 </Grid>
 
                             </Grid>
+                            {formErrors ?
+                                formErrors.length
+                                    ? <Alert type="danger" messages={formErrors} />
+                                    : null
+                                : null}
                             <Button
                                 type="submit"
                                 fullWidth
