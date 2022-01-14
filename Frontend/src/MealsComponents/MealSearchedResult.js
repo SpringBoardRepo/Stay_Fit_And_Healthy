@@ -1,7 +1,5 @@
 
-import { Card, Row } from "react-bootstrap";
-import { Button } from 'reactstrap';
-import ScrollContainer from 'react-indiana-drag-scroll'
+import { Row } from "react-bootstrap";
 import "./MealSearchedResult.css";
 import SearchedMealsCard from "./SearchedMealsCard";
 

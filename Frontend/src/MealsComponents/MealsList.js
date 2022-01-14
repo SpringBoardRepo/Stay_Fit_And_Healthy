@@ -1,4 +1,4 @@
-import { Badge, Button, Card, Row } from 'react-bootstrap';
+import { Button, Row } from 'react-bootstrap';
 import Meal from './Meal';
 import "./Meal.css";
 import MealSearch from './MealSearch';

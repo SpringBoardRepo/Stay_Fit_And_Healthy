@@ -7,6 +7,7 @@ import { Fragment, useEffect, useState } from "react";
 import useLocalStorage from "./useLocalStorage";
 import jwt_decode from "jwt-decode"
 import UserContext from "./UserContext";
+import LoadingSpinner from "./LoadingSpinner";
 
 // Key name for storing token in localStorage for "remember me" re-login
 export const TOKEN_STORAGE_ID = "myfitness-token";
@@ -17,25 +18,24 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [calories, setCalories] = useState(2000);
   const [dietcalories, setDietCalories] = useState('');
-  const [savedMeals, setSavedMeals] = useState([]);
+  const [infoLoaded, setInfoLoaded] = useState(false);
 
   useEffect(function loadUserInfo() {
-
     async function getCurrentUser() {
       if (token) {
         try {
           let user = jwt_decode(token, { complete: true });
-          console.log("USER", user)
           MyfitnessApi.token = token;
           let currentUser = await MyfitnessApi.getCurrentUser(user.username);
-          console.log("CURRENTUSER", currentUser);
           setCurrentUser(currentUser);
         } catch (error) {
           console.error(error);
           setCurrentUser(null);
         }
       }
+      setInfoLoaded(true);
     }
+    setInfoLoaded(false);
     getCurrentUser();
   }, [token]);
 
@@ -91,6 +91,8 @@ function App() {
     let meal = await MyfitnessApi.remove(currentUser.username, mealId);
     console.log(meal);
   }
+
+  if (!infoLoaded) return <LoadingSpinner />;
 
   return (
     <div className="App">

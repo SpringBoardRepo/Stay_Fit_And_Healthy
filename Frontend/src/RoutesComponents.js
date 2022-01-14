@@ -17,8 +17,8 @@ function RoutesComponents({ login, signUp }) {
                 element={
                     <BMICalculator />
                 }
-            /><
-                Route element={<PrivateRoutes />}>
+            />
+            <Route element={<PrivateRoutes />}>
                 <Route path="/meals"
                     element={
                         <Meals />

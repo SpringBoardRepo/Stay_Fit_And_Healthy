@@ -30,7 +30,7 @@ function BmrForm({ weight, height, age, gender, handleChange, handleSubmit }) {
             </Form.Group>
             <Form.Group className="mb-3" >
                 <Form.Label><b>Age</b></Form.Label>
-                <Form.Control type="text"
+                <Form.Control type="number"
                     placeholder="Enter Your Age"
                     required
                     id="age"
