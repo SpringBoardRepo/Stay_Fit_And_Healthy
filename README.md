@@ -36,11 +36,9 @@ The `Food Journal` page allows the user to view and delete meals for the day and
   ![Untitled Project](https://user-images.githubusercontent.com/62223366/149674685-4c352184-4995-4fb5-8a15-4434ebfc6444.gif)
   
 ## Meals Suggestions and Meal Search
-
-![Untitled Project Meals](https://user-images.githubusercontent.com/62223366/149674849-f9fd37c5-846e-47b8-89ac-57a62f6aeadc.gif)
+![Untitled Projectm](https://user-images.githubusercontent.com/62223366/149675854-e75d83f0-7bf0-44fc-bef4-0ac76aa75240.gif)
 
 ## Food Journal
-
 ![Untitled Projectf](https://user-images.githubusercontent.com/62223366/149675383-abaf14c6-6b3b-4bb0-b346-c81b790c8860.gif)
 
 ## Technology Stack
