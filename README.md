@@ -3,7 +3,7 @@
 MyFitness is a mobile-friendly web application that allows users to keep track of their health. And it is designed for people who want to manage their weight and plan their meals. The goal is to track their calories in and out to help with the struggles of weight loss or weight gain.
 
 ## Live Demo:
-
+https://myfitness-frontend.herokuapp.com/
 
 ## Features:
 
