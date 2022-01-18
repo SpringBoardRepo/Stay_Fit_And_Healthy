@@ -1,6 +1,5 @@
 ## MyFitness
-
-MyFitness is a mobile-friendly web application that allows users to keep track of their health. And it is designed for people who want to manage their weight and plan their meals. The goal is to track their calories in and out to help with the struggles of weight loss or weight gain.
+MyFitness is a mobile-friendly web application that allows users to manage their weight and plan their meals. The goal is to track calories going in and out so as to ease the struggles of weight loss or weight gain.
 
 ## Live Demo:
 https://myfitness-frontend.herokuapp.com/
@@ -8,7 +7,7 @@ https://myfitness-frontend.herokuapp.com/
 ## Features:
 
 ### Guest 
-  - BMR calculator.
+  - Basal Metabolic Rate (BMR) calculator.
   - Sign up for a new account with password hashing `Bcryptjs`
 
 ### Signed up User - everything Guest can do and more:
@@ -25,14 +24,15 @@ https://myfitness-frontend.herokuapp.com/
 
 ## User Flow
 When the user first opens the page, the user has the option to sign up for an account or log into an existing account.
-Without logging in, the user is able to use the `BMR Calculator` on the navigation bar.
+Without logging in, the user is able to use the `Basal Metabolic Rate (BMR) Calculator` on the navigation bar.
 
-The `BMR` tab allows the user to input their weight, height, Gender and age to calculate their BMR. The user will be provided with their BMR and user will select their Activity level and choose the option for Diet plan, how much calories they need to maintain their weight. It will give user the calories count in order to maintain or achicve their goal.
+The `Basal Metabolic Rate (BMR)` tab allows the user to input their weight, height, Gender and age to calculate their BMR. The user will be provided with their BMR and user will select their Activity level and choose the option for Diet plan, how much calories they need to maintain their weight. It will give user the calories count in order to maintain or achicve their goal.
 After Calulating the Calories user can go to the "Meal Suggestion" It will take user to the Meal page with some Suggestions. The Meals tab allows the user to search meals; a list of meals will appear where the user is able to click the "Add to Food Journal" button and to view added meal byclicking the "Go to the Food journal" button
 
 The `Food Journal` page allows the user to view and delete meals for the day and also view meals which were added with date, meal name and calories.
 
 ## BMR Calculator
+Your BMR can be used to help you gain, lose, or maintain your weight. By knowing how many calories you burn, you can know how many to consume.
   ![Untitled Project](https://user-images.githubusercontent.com/62223366/149674685-4c352184-4995-4fb5-8a15-4434ebfc6444.gif)
   
 ## Meals Suggestions and Meal Search
@@ -59,5 +59,7 @@ The `Food Journal` page allows the user to view and delete meals for the day and
  - `psql  CREATE DATABASE myfitness`
  - Connect to the DB `\c myfitness`.
  - Create tables `\i myfitness-schema.sql`.
+ - Install dependencies `npm install`
  - Start Backend Server `node server.js` will start on Port:3001
  - Start Frontend Server `npm start` start on Port:3000
+ - Test run for frontend `npm test` and for backend `jest`
