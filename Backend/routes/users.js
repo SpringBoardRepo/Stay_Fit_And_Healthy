@@ -34,8 +34,8 @@ router.get("/meals/:username", async function (req, res, next) {
 router.post("/:username/meals", async function (req, res, next) {
 
     try {
-        const mealId = +(req.body.mealId);
-        const meal = await User.saveToFoodJournal(req.params.username, { ...req.body });
+        const mealId = req.body.mealId;
+        await User.saveToFoodJournal(req.params.username, { ...req.body });
         return res.json({ Saved: mealId });
     }
 
@@ -49,7 +49,7 @@ router.delete("/:username/meals/:meal_id", async function (req, res, next) {
     try {
 
         const mealId = (req.params.meal_id);
-        const meal = await User.remove(req.params.username, mealId);
+        await User.remove(req.params.username, mealId);
         return res.json({ DELETED: mealId });
     }
     catch (err) { return next(err); }

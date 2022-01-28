@@ -7,7 +7,7 @@ function PrivateRoutes() {
 
     const { currentUser } = useContext(UserContext);
 
-    console.debug("Private Routes", "currentUser=", currentUser);
+    // console.debug("Private Routes", "currentUser=", currentUser);
 
 
     return currentUser ? <Outlet /> : <Navigate to="/login" />;

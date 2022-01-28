@@ -24,11 +24,11 @@ function Login({ login }) {
         username: "",
         password: ""
     });
-    useEffect(() => {
-        if (currentUser) {
-            navigate("/bmr");
-        }
-    }, [currentUser]);
+    // useEffect(() => {
+    //     if (currentUser) {
+    //         navigate("/bmr");
+    //     }
+    // }, [currentUser]);
 
     const handleChange = (evt) => {
         const { name, value } = evt.target;
@@ -43,9 +43,8 @@ function Login({ login }) {
         event.preventDefault();
         console.log(loginformData);
         let result = await login(loginformData);
-        if (result.success === 'true') {
+        if (result.success === true) {
             navigate("/bmr");
-            console.log("LoggedIN");
         }
         else {
             setFormErrors(result.error);

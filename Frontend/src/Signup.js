@@ -25,11 +25,11 @@ function Signup({ signUp }) {
         lastName: "",
         email: ""
     }
-    useEffect(() => {
-        if (currentUser) {
-            navigate("/bmr");
-        }
-    }, [currentUser]);
+    // useEffect(() => {
+    //     if (currentUser) {
+    //         navigate("/bmr");
+    //     }
+    // }, [currentUser]);
 
     const [signUpFormData, setSignUpFromData] = useState(INTIAL_DATA);
     const [formErrors, setFormErrors] = useState([]);
@@ -48,7 +48,7 @@ function Signup({ signUp }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const result = await signUp(signUpFormData);
-        if (result.success === 'true') {
+        if (result.success === true) {
             navigate('/bmr');
             setSignUpFromData(INTIAL_DATA);
         }

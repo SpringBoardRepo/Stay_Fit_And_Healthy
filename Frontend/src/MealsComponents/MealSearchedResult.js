@@ -4,7 +4,7 @@ import "./MealSearchedResult.css";
 import SearchedMealsCard from "./SearchedMealsCard";
 
 function MealSearchedResult({ searchedMeals }) {
-    console.log(searchedMeals);
+    // console.log(searchedMeals);
 
     return (
         <Row className="mt-3">

@@ -34,7 +34,7 @@ function MealsTable({ meals, handleRemove }) {
                             <td>{m.id}</td>
                             <td>{m.meal_name}</td>
                             <td>{m.calories}</td>
-                            <td>{m.created_at}</td>
+                            <td>{new Date(m.created_at).toLocaleString()}</td>
                         </tr>
                     </tbody>
                 )}

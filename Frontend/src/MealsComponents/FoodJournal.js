@@ -4,7 +4,7 @@ import UserContext from '../UserContext';
 import MealsTable from './MealsTable';
 import { Button } from 'reactstrap';
 import "./FoodJournal.css";
-import image from "../Image/empty-cart (2).png";
+import image from "../Image/empty-cart.png";
 
 function FoodJournal() {
 

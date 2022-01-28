@@ -6,7 +6,7 @@ import UserContext from "./UserContext";
 function Home() {
 
     const { currentUser } = useContext(UserContext);
-    console.debug("Homepage", "currentUser=", currentUser);
+    // console.debug("Homepage", "currentUser=", currentUser);
 
     return (<>
         {currentUser

@@ -8,7 +8,7 @@ class MyfitnessApi {
     static token;
 
     static async request(endpoint, data = {}, method = "get") {
-        console.log(`ENDPOINT ${endpoint} , DATA=${JSON.stringify(data)}`);
+        // console.log(`ENDPOINT ${endpoint} , DATA=${JSON.stringify(data)}`);
 
         const url = `${BASE_URL}/${endpoint}`;
         const headers = { Authorization: `Bearer ${MyfitnessApi.token}` };
@@ -35,7 +35,6 @@ class MyfitnessApi {
 
     static async getCurrentUser(username) {
         const res = await this.request(`users/${username}`);
-        console.log(`CURRENT USER  ${JSON.stringify(res.user)}`);
         return res.user;
     }
     static async addToFoodJournal(username, data) {

@@ -120,14 +120,21 @@ function BMRCalculator() {
             caloriesCountAfterDietPlan(totalCalories);
         }
     }
+
+    const props = {
+        weight: bmrData.weight,
+        height: bmrData.height,
+        age: bmrData.age,
+        gender: bmrData.gender
+    };
     return (
         <>
             <Card style={{ width: '22rem' }}>
                 <h4 className="Title">BMR &amp; Calories Calculator</h4>
                 <BmrForm
-                    value={bmrData.weight, bmrData.height, bmrData.age, bmrData.gender}
+                    // value={bmrData.weight, bmrData.height, bmrData.age, bmrData.gender}
                     handleSubmit={handleSubmit}
-                    handleChange={handleChange}
+                    handleChange={handleChange}{...props}
                 />
                 {bmr ?
                     <div><Button className="Btn"

@@ -78,8 +78,8 @@ function App() {
 
   async function addMealsToUsers(data) {
 
-    let res = await MyfitnessApi.addToFoodJournal(currentUser.username, data);
-    //setSavedMeals(res);
+    await MyfitnessApi.addToFoodJournal(currentUser.username, data);
+
   }
 
   async function getMeals() {
@@ -88,8 +88,7 @@ function App() {
   }
 
   async function removeMealsFromList(mealId) {
-    let meal = await MyfitnessApi.remove(currentUser.username, mealId);
-    console.log(meal);
+    await MyfitnessApi.remove(currentUser.username, mealId);
   }
 
   if (!infoLoaded) return <LoadingSpinner />;

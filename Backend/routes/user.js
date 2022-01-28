@@ -77,7 +77,6 @@ class User {
             ],
         );
         const user = result.rows[0];
-        console.log(`USER REGISTER ${JSON.stringify(user)}`);
         return user;
     }
 
